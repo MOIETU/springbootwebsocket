@@ -64,6 +64,7 @@ public class WebSocketClient {
     }
 
     public void sendTextMessage(String message) {
+        log.info("发送信息:【{}】", message);
         RemoteEndpoint.Async async = this.session.getAsyncRemote();
         async.sendText(message);
     }

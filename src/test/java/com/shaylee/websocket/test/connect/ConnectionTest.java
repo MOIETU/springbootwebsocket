@@ -32,10 +32,10 @@ public class ConnectionTest {
 		}
 		
 		try {
-			Thread.sleep(20000);
-			
-			client.sendTextMessage("测试发送 ABC ... ");
-			
+			for (int i = 0; i < 20; i++) {
+				Thread.sleep(3000);
+				client.sendTextMessage("测试发送 ABC ... ");
+			}
 			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			log.error("", e);
