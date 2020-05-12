@@ -32,7 +32,7 @@ public class WebSocketClientController {
     @RequestMapping("/send/{userName}")
     public void send(@PathVariable("userName") String userName) {
         SocketClient client = map.get(userName);
-        client.sendTextMessage("测试发送 ABC ... ");
+        client.sendTextMessage(userName + "测试发送 ABC ... ");
     }
 
     @RequestMapping("/close/{userName}")
