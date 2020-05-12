@@ -42,7 +42,7 @@ public class SocketClient {
     public SocketClient(WebSocketContainer container, String wsPath) {
         try {
             this.session = container.connectToServer(this, URI.create(wsPath));
-            log.info("连接服务器, 返回session, 会话ID:[{}]", session.getId());
+            log.info("连接服务器, 返回session, 会话ID:【{}】", session.getId());
         } catch (DeploymentException | IOException e) {
             log.error("", e);
         }
@@ -50,12 +50,12 @@ public class SocketClient {
 
     @OnOpen
     public void onOpen(Session userSession) {
-        log.info("连接ws服务器成功, sessionId: [{}]", userSession.getId());
+        log.info("连接ws服务器成功, sessionId: 【{}】", userSession.getId());
     }
 
     @OnClose
     public void onClose(Session userSession, CloseReason reason) {
-
+        log.info("【{}】连接关闭, 原因:【{}】", userSession.getId(), reason);
     }
 
     @OnMessage
