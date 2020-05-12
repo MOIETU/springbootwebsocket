@@ -1,5 +1,8 @@
 package com.suyu.websocket.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import javax.websocket.Session;
 import java.io.Serializable;
 
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @Email nzlsgg@163.com
  * @Date 2019/3/1 上午9:08
  */
+@Data
+@AllArgsConstructor
 public class Client implements Serializable {
 
     private static final long serialVersionUID = 8957107006902627635L;
@@ -15,28 +20,4 @@ public class Client implements Serializable {
     private String userName;
 
     private Session session;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Session getSession() {
-        return session;
-    }
-
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public Client(String userName, Session session) {
-        this.userName = userName;
-        this.session = session;
-    }
-
-    public Client() {
-    }
 }

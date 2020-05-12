@@ -1,8 +1,7 @@
 package com.suyu.websocket.server;
 
 import com.suyu.websocket.entity.Client;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
@@ -11,14 +10,15 @@ import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@ServerEndpoint(value = "/socketServer/{userName}")
+/**
+ * websocket服务端点
+ */
+@Slf4j
 @Component
+@ServerEndpoint(value = "/socketServer/{userName}")
 public class SocketServer {
-
-    private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
     /**
      * 用线程安全的CopyOnWriteArraySet来存放客户端连接的信息
@@ -50,7 +50,7 @@ public class SocketServer {
         this.session = session;
         socketServers.add(new Client(userName, session));
 
-        logger.info("客户端:【{}】连接成功", userName);
+        log.info("客户端:【{}】连接成功", userName);
 
     }
 
@@ -68,7 +68,7 @@ public class SocketServer {
                 .collect(Collectors.toList()).get(0);
         sendMessage(client.getUserName() + "<--" + message, SYS_USERNAME);
 
-        logger.info("客户端:【{}】发送信息:{}", client.getUserName(), message);
+        log.info("客户端:【{}】发送信息:{}", client.getUserName(), message);
     }
 
     /**
@@ -80,7 +80,7 @@ public class SocketServer {
         socketServers.forEach(client -> {
             if (client.getSession().getId().equals(session.getId())) {
 
-                logger.info("客户端:【{}】断开连接", client.getUserName());
+                log.info("客户端:【{}】断开连接", client.getUserName());
                 socketServers.remove(client);
 
             }
@@ -97,7 +97,7 @@ public class SocketServer {
         socketServers.forEach(client -> {
             if (client.getSession().getId().equals(session.getId())) {
                 socketServers.remove(client);
-                logger.error("客户端:【{}】发生异常", client.getUserName());
+                log.error("客户端:【{}】发生异常", client.getUserName());
                 error.printStackTrace();
             }
         });
@@ -117,7 +117,7 @@ public class SocketServer {
                 try {
                     client.getSession().getBasicRemote().sendText(message);
 
-                    logger.info("服务端推送给客户端 :【{}】", client.getUserName(), message);
+                    log.info("服务端推送给客户端 :【{}】", client.getUserName(), message);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -175,7 +175,7 @@ public class SocketServer {
                     }
                 });
 
-        logger.info("服务端推送给所有客户端 :【{}】", message);
+        log.info("服务端推送给所有客户端 :【{}】", message);
     }
 
     /**
