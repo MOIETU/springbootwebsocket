@@ -9,7 +9,6 @@ import javax.websocket.DeploymentException;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
-import javax.websocket.RemoteEndpoint;
 import javax.websocket.Session;
 import javax.websocket.WebSocketContainer;
 import java.io.IOException;
@@ -25,27 +24,21 @@ import java.net.URI;
 @ClientEndpoint
 public class SocketClient {
 
-    private Session session;
-
-    public SocketClient(String path) {
-        log.info("Websocket 路径 【{}】", path);
+    public Session connect(String wsPath) {
+        log.info("Websocket 路径 【{}】", wsPath);
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-        try {
-            this.session = container.connectToServer(this, URI.create(path));
-        } catch (DeploymentException e) {
-            log.error("", e);
-        } catch (IOException e) {
-            log.error("", e);
-        }
+        return this.connect(container, wsPath);
     }
 
-    public SocketClient(WebSocketContainer container, String wsPath) {
+    public Session connect(WebSocketContainer container, String wsPath) {
         try {
-            this.session = container.connectToServer(this, URI.create(wsPath));
-            log.info("连接服务器, 返回session, 会话ID:【{}】", session.getId());
+            Session session = container.connectToServer(this, URI.create(wsPath));
+            log.info("连接服务器, 当前会话ID:【{}】", session.getId());
+            return session;
         } catch (DeploymentException | IOException e) {
             log.error("", e);
         }
+        return null;
     }
 
     @OnOpen
@@ -61,26 +54,5 @@ public class SocketClient {
     @OnMessage
     public void onMessage(String message) {
         log.info("收到信息, 内容:【{}】", message);
-    }
-
-    public void sendTextMessage(String message) {
-        log.info("发送信息:【{}】", message);
-        RemoteEndpoint.Async async = this.session.getAsyncRemote();
-        async.sendText(message);
-    }
-
-    /**
-     * 连接是否打开
-     * */
-    public boolean isOpen() {
-        return this.session != null && this.session.isOpen();
-    }
-
-    public void close() {
-        try {
-            this.session.close();
-        } catch (IOException e) {
-            log.error("", e);
-        }
     }
 }
