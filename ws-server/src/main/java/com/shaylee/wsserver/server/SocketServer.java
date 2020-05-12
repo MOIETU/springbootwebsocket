@@ -1,6 +1,6 @@
-package com.shaylee.websocket.server;
+package com.shaylee.wsserver.server;
 
-import com.shaylee.websocket.entity.Client;
+import com.shaylee.wsserver.entity.Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

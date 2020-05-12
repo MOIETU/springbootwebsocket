@@ -1,4 +1,4 @@
-package com.shaylee.websocket.config;
+package com.shaylee.wsserver.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

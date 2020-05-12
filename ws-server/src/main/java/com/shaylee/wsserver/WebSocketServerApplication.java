@@ -1,4 +1,4 @@
-package com.shaylee.websocket;
+package com.shaylee.wsserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,6 +1,6 @@
-package com.shaylee.websocket.controller;
+package com.shaylee.wsserver.controller;
 
-import com.shaylee.websocket.server.SocketServer;
+import com.shaylee.wsserver.server.SocketServer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

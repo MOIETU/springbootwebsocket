@@ -1,4 +1,4 @@
-package com.shaylee.websocket.test.client;
+package com.shaylee.wsserver.test.client;
 
 import lombok.extern.slf4j.Slf4j;
 

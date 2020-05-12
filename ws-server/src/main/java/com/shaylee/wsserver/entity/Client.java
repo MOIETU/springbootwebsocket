@@ -1,4 +1,4 @@
-package com.shaylee.websocket.entity;
+package com.shaylee.wsserver.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

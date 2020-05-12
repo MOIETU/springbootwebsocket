@@ -1,13 +1,11 @@
-package com.shaylee.websocket.test.connect;
+package com.shaylee.wsserver.test.connect;
 
-import com.shaylee.websocket.test.TestApplication;
-import com.shaylee.websocket.test.client.WebSocketClient;
+import com.shaylee.wsserver.test.TestApplication;
+import com.shaylee.wsserver.test.client.WebSocketClient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
