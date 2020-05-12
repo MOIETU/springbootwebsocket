@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Title: WebSocket客户端控制器
@@ -19,7 +20,7 @@ import java.util.HashMap;
 @RequestMapping("/ws/client")
 public class WebSocketClientController {
 
-    public static HashMap<String, SocketClient> map = new HashMap<>();
+    public static Map<String, SocketClient> map = new ConcurrentHashMap<>();
 
     @RequestMapping("/connect/{userName}")
     public void connect(@PathVariable("userName") String userName) {
